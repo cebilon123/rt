@@ -8,7 +8,6 @@ namespace Api.Application.Exceptions
 
         protected ApplicationException(string message) : base(message)
         {
-            
         }
     }
 }

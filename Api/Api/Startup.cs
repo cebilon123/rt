@@ -1,14 +1,8 @@
 using System;
-using Api.Core.Domain;
-using Api.Core.Repositories;
 using Api.Helpers.Swagger;
-using Api.Infrastructure.Auth;
-using Api.Infrastructure.Auth.Models;
 using Api.Infrastructure.Errors;
 using Api.Infrastructure.Initialize;
 using Api.Infrastructure.Repositories;
-using Api.Infrastructure.Repositories.Documents;
-using JWT;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using MongoDB.Driver;
 
 namespace Api
 {
@@ -34,15 +27,18 @@ namespace Api
         {
             BaseConfiguration(services);
         }
-        
+
         private void BaseConfiguration(IServiceCollection services)
         {
-            services.AddLogging(loggingBuilder => {
-                loggingBuilder.AddFile("Logs/app_{0:yyyy}-{0:MM}-{0:dd}.log", fileLoggerOpts => {
-                    fileLoggerOpts.FormatLogFileName = fName => string.Format(fName, DateTime.UtcNow);
-                });
+            services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.AddFile("Logs/app_{0:yyyy}-{0:MM}-{0:dd}.log",
+                    fileLoggerOpts =>
+                    {
+                        fileLoggerOpts.FormatLogFileName = fName => string.Format(fName, DateTime.UtcNow);
+                    });
             });
-            
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -79,7 +75,7 @@ namespace Api
             app.UseRouting();
 
             app.UseAuthorization();
-            
+
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

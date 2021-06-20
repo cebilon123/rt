@@ -9,9 +9,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Autofac" Version="6.2.0" />
-      <PackageReference Include="Isopoh.Cryptography.Argon2" Version="1.1.10" />
-      <PackageReference Include="JWT" Version="8.2.2" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
       <PackageReference Include="MongoDB.Bson" Version="2.13.0-beta1" />
       <PackageReference Include="MongoDB.Driver" Version="2.13.0-beta1" />

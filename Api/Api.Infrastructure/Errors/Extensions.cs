@@ -4,7 +4,10 @@ namespace Api.Infrastructure.Errors
 {
     public static class Extensions
     {
-        public static IServiceCollection AddExceptionToErrorMapper<TImplementation>(this IServiceCollection services) where TImplementation: class, IExceptionToResponseMapper
-            => services.AddSingleton<IExceptionToResponseMapper, TImplementation>();
+        public static IServiceCollection AddExceptionToErrorMapper<TImplementation>(this IServiceCollection services)
+            where TImplementation : class, IExceptionToResponseMapper
+        {
+            return services.AddSingleton<IExceptionToResponseMapper, TImplementation>();
+        }
     }
 }

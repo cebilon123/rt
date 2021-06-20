@@ -8,7 +8,6 @@ namespace Api.Core.Exceptions
 
         protected DomainException(string message) : base(message)
         {
-            
         }
     }
 }

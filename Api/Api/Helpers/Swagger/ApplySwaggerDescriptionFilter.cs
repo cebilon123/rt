@@ -10,10 +10,10 @@ namespace Api.Helpers.Swagger
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             if (context.ApiDescription.CustomAttributes()
-                .FirstOrDefault(a => a.GetType() == typeof(SwaggerDescriptionAttribute)) is SwaggerDescriptionAttribute attr)
-            {
+                    .FirstOrDefault(a => a.GetType() == typeof(SwaggerDescriptionAttribute)) is
+                SwaggerDescriptionAttribute
+                attr)
                 operation.Description = attr.Description;
-            }
         }
     }
 }

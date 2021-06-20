@@ -6,7 +6,8 @@ using MongoDB.Driver;
 
 namespace Api.Infrastructure.Repositories
 {
-    public interface IMongoGenericRepository<TEntity, in TIdentifiable> where TEntity: class, IIdentifiable<TIdentifiable>
+    public interface IMongoGenericRepository<TEntity, in TIdentifiable>
+        where TEntity : class, IIdentifiable<TIdentifiable>
     {
         IMongoCollection<TEntity> Collection { get; }
         Task<TEntity> GetAsync(TIdentifiable id);

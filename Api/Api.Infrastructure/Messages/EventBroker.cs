@@ -10,17 +10,17 @@ namespace Api.Infrastructure.Messages
     {
         private readonly IServiceScopeFactory _serviceFactory;
 
-        public EventBroker(IServiceScopeFactory serviceFactory) => _serviceFactory = serviceFactory;
-        
+        public EventBroker(IServiceScopeFactory serviceFactory)
+        {
+            _serviceFactory = serviceFactory;
+        }
+
         public async Task PublishAsync<TEvent>(TEvent @event) where TEvent : class, IEvent
         {
             using IServiceScope scope = _serviceFactory.CreateScope();
             var eventHandlers = scope.ServiceProvider.GetServices<IEventHandler<TEvent>>();
-            
-            foreach (var eventHandler in eventHandlers)
-            {
-                await eventHandler.HandleAsync(@event);
-            }
+
+            foreach (var eventHandler in eventHandlers) await eventHandler.HandleAsync(@event);
         }
     }
 }

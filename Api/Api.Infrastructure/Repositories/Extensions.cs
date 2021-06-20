@@ -9,12 +9,15 @@ namespace Api.Infrastructure.Repositories
     public static class Extensions
     {
         public static IServiceCollection AddMongoDb(this IServiceCollection services, string connectionString)
-            => services.AddSingleton<IMongoClient>(new MongoClient(connectionString));
+        {
+            return services.AddSingleton<IMongoClient>(new MongoClient(connectionString));
+        }
 
 
         public static IServiceCollection AddRepository<TEntity, TIdentifiable>(this IServiceCollection services,
             string collectionName) where TEntity : class, IIdentifiable<TIdentifiable>
-            => services.AddTransient<IMongoGenericRepository<TEntity, TIdentifiable>>(sp =>
+        {
+            return services.AddTransient<IMongoGenericRepository<TEntity, TIdentifiable>>(sp =>
             {
                 var database = sp.GetService<IMongoClient>()?.GetDatabase("omniok_main");
 
@@ -23,6 +26,7 @@ namespace Api.Infrastructure.Repositories
 
                 return new MongoGenericRepository<TEntity, TIdentifiable>(database, collectionName);
             });
+        }
 
         public static IApplicationBuilder UseIndexOnRepository<TEntity, TIdentifiable>(this IApplicationBuilder app,
             IndexKeysDefinition<TEntity> keysDefinition, CreateIndexOptions options)

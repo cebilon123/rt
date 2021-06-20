@@ -11,14 +11,17 @@ namespace Api.Infrastructure.Cqrs
     {
         private readonly IServiceScopeFactory _serviceFactory;
 
-        public QueryDispatcher(IServiceScopeFactory serviceFactory) => this._serviceFactory = serviceFactory;
+        public QueryDispatcher(IServiceScopeFactory serviceFactory)
+        {
+            _serviceFactory = serviceFactory;
+        }
 
         public async Task<TResult> QueryAsync<TResult>(IQuery<TResult> query)
         {
             TResult result;
-            using (IServiceScope scope = this._serviceFactory.CreateScope())
+            using (IServiceScope scope = _serviceFactory.CreateScope())
             {
-                Type serviceType = typeof (IQueryHandler<,>).MakeGenericType(query.GetType(), typeof (TResult));
+                Type serviceType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
                 object requiredService = scope.ServiceProvider.GetRequiredService(serviceType);
                 MethodInfo method = serviceType.GetMethod("HandleAsync");
 
@@ -32,6 +35,7 @@ namespace Api.Infrastructure.Cqrs
                     });
                 result = await (Task<TResult>) obj!;
             }
+
             return result;
         }
 
@@ -39,7 +43,11 @@ namespace Api.Infrastructure.Cqrs
         {
             TResult result;
             using (IServiceScope scope = _serviceFactory.CreateScope())
-                result = await scope.ServiceProvider.GetRequiredService<IQueryHandler<TQuery, TResult>>().HandleAsync(query);
+            {
+                result = await scope.ServiceProvider.GetRequiredService<IQueryHandler<TQuery, TResult>>()
+                    .HandleAsync(query);
+            }
+
             return result;
         }
     }

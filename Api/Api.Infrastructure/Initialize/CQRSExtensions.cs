@@ -30,7 +30,7 @@ namespace Api.Infrastructure.Initialize
             services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
             return services;
         }
-        
+
         public static IServiceCollection AddQueryDispatcher(this IServiceCollection services)
         {
             services.AddSingleton<IQueryDispatcher, QueryDispatcher>();

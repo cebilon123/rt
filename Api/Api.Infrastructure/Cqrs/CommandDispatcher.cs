@@ -8,12 +8,17 @@ namespace Api.Infrastructure.Cqrs
     {
         private readonly IServiceScopeFactory _serviceFactory;
 
-        public CommandDispatcher(IServiceScopeFactory serviceFactory) => _serviceFactory = serviceFactory;
+        public CommandDispatcher(IServiceScopeFactory serviceFactory)
+        {
+            _serviceFactory = serviceFactory;
+        }
 
         public async Task SendAsync<T>(T command) where T : class, ICommand
         {
             using (IServiceScope scope = _serviceFactory.CreateScope())
+            {
                 await scope.ServiceProvider.GetRequiredService<ICommandHandler<T>>().HandleAsync(command);
+            }
         }
     }
 }

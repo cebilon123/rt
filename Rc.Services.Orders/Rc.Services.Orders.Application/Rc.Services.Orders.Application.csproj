@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Rc.Services.Orders.Application</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Rc.Services.Orders.Core\Rc.Services.Orders.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Attributes" />
+      <Folder Include="Handlers\CommandHandlers" />
+      <Folder Include="Handlers\Commands" />
+      <Folder Include="Handlers\Queries" />
+      <Folder Include="Handlers\QueryHandlers" />
+      <Folder Include="Helpers" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.Rc.Services.Orders.iml
+# Datasource local storage ignored files
+/../../../../../../../../../:\Users\MichalPC\Projekty\rt\Rc.Services.Orders\.idea\.idea.Rc.Services.Orders\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

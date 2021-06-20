@@ -1,0 +1,5 @@
+2021-06-20T17:54:58.7735249+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Now listening on: https://localhost:5001
+2021-06-20T17:54:58.7737607+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Now listening on: http://localhost:5000
+2021-06-20T17:54:58.7738284+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Application started. Press Ctrl+C to shut down.
+2021-06-20T17:54:58.7738380+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Hosting environment: Development
+2021-06-20T17:54:58.7738452+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Content root path: C:\Users\MichalPC\Projekty\rt\Rc.Services.Fraud\Rc.Services.Fraud.Api

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Rc.Services.Orders.Core.Exceptions;
 
 namespace Rc.Services.Orders.Application.Handlers.Commands.Handlers
 {
@@ -6,7 +7,9 @@ namespace Rc.Services.Orders.Application.Handlers.Commands.Handlers
     {
         public async Task HandleAsync(CreateOrder command)
         {
-            throw new System.NotImplementedException();
+            if (!command.IsValid())
+                throw new InvalidOrderException();
+            
         }
     }
 }

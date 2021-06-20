@@ -24,6 +24,9 @@ namespace Rc.Services.Orders.Core.Domain
         {
             ValidateProducts(products);
 
+            if (amount < 0)
+                throw new InvalidAmountException(amount);
+            
             Email = email;
             Amount = amount;
             Address = address;

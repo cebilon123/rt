@@ -10,8 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Handlers\Queries" />
-      <Folder Include="Handlers\QueryHandlers" />
+      <Folder Include="Handlers\Queries\Handlers" />
     </ItemGroup>
 
 </Project>

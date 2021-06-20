@@ -5,8 +5,4 @@
         <RootNamespace>Rc.Services.Orders.Core</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Repositories" />
-    </ItemGroup>
-
 </Project>

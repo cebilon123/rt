@@ -7,9 +7,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Rc.Services.Orders.Api.Helpers.Swagger;
+using Rc.Services.Orders.Core.Repositories;
 using Rc.Services.Orders.Infrastructure.Errors;
 using Rc.Services.Orders.Infrastructure.Initialize;
 using Rc.Services.Orders.Infrastructure.Repositories;
+using Rc.Services.Orders.Infrastructure.Repositories.Documents;
 
 namespace Rc.Services.Orders.Api
 {
@@ -52,10 +54,10 @@ namespace Rc.Services.Orders.Api
                 .AddCommandHandlers()
                 .AddQueryHandlers()
                 .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
-                .AddMongoDb(Configuration["DatabaseConnectionString"]);
-            // .AddRepository<UserDocument, Guid>("users");
+                .AddMongoDb(Configuration["DatabaseConnectionString"])
+                .AddRepository<OrderDocument, Guid>("orders");
 
-            // services.AddTransient<IUserRepository, UserRepository>();
+             services.AddTransient<IOrderRepository, OrderRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

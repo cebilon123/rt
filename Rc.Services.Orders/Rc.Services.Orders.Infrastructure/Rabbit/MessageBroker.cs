@@ -17,6 +17,7 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
         public MessageBroker(IBus bus)
         {
             _bus = bus;
+            _bus.SendReceive.Receive<IEvent>(QueueName, p => Console.WriteLine(p));
         }
 
         public async Task PublishAsync(params IEvent[] events)
@@ -26,8 +27,14 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
         {
             if (events is null)
                 return;
-            
-            throw new NotImplementedException();
+
+            foreach (var @event in events)
+            {
+                if (@event is null)
+                    continue;
+
+                await _bus.SendReceive.SendAsync(QueueName, @event);
+            }
         }
     }
 }

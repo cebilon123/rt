@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Rc.Services.Orders.Core.Events;
 using Rc.Services.Orders.Core.Exceptions;
@@ -32,6 +33,7 @@ namespace Rc.Services.Orders.Core.Domain
             Address = address;
             Products = products;
             Version = version;
+            Id = Guid.NewGuid();
         }
 
         private static void ValidateProducts(IEnumerable<Product> products)

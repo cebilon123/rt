@@ -5,6 +5,7 @@ using Rc.Services.Orders.Application.Handlers;
 using Rc.Services.Orders.Application.Services;
 using Rc.Services.Orders.Infrastructure.Cqrs;
 using Rc.Services.Orders.Infrastructure.Rabbit;
+using Rc.Services.Orders.Infrastructure.Services;
 
 namespace Rc.Services.Orders.Infrastructure.Initialize
 {
@@ -45,5 +46,11 @@ namespace Rc.Services.Orders.Infrastructure.Initialize
 
         public static IServiceCollection AddMessageBroker(this IServiceCollection services)
             => services.AddTransient<IMessageBroker, MessageBroker>();
+        
+        public static IServiceCollection AddDomainEventsToEventsMapper(this IServiceCollection services)
+            => services.AddTransient<IDomainEventToEventMapper, DomainEventToEventMapper>();
+        
+        public static IServiceCollection AddEventsProcessor(this IServiceCollection services)
+            => services.AddTransient<IEventProcessor, EventProcessor>();
     }
 }

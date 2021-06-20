@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Rc.Services.Orders.Application.Events;
+using Rc.Services.Orders.Application.Events.External;
 using Rc.Services.Orders.Application.Services;
 using Rc.Services.Orders.Core.Events;
 
@@ -14,6 +15,7 @@ namespace Rc.Services.Orders.Infrastructure.Services
         public IEvent Map(IDomainEvent domainEvent)
             => domainEvent switch
             {
+                OrderCreated e => new OrderAdded(e.Order.Id),
                 _ => null
             };
 

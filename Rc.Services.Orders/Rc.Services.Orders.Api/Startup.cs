@@ -49,15 +49,17 @@ namespace Rc.Services.Orders.Api
             });
             services
                 .AddHttpContextAccessor()
-                .AddCommandDispatcher()
-                .AddQueryDispatcher()
+                .AddRabbitMq(Configuration["RabbitMq"])
+                .AddMessageBroker()
+                .AddDomainEventsToEventsMapper()
+                .AddEventsProcessor()
                 .AddCommandHandlers()
                 .AddQueryHandlers()
                 .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
                 .AddMongoDb(Configuration["DatabaseConnectionString"])
                 .AddRepository<OrderDocument, Guid>("orders")
-                .AddRabbitMq(Configuration["RabbitMq"])
-                .AddMessageBroker();
+                .AddCommandDispatcher()
+                .AddQueryDispatcher();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

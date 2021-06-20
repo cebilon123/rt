@@ -27,11 +27,6 @@ namespace Rc.Services.Orders.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            BaseConfiguration(services);
-        }
-
-        private void BaseConfiguration(IServiceCollection services)
-        {
             services.AddLogging(loggingBuilder =>
             {
                 loggingBuilder.AddFile("Logs/app_{0:yyyy}-{0:MM}-{0:dd}.log",
@@ -57,7 +52,7 @@ namespace Rc.Services.Orders.Api
                 .AddMongoDb(Configuration["DatabaseConnectionString"])
                 .AddRepository<OrderDocument, Guid>("orders");
 
-             services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

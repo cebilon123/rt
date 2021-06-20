@@ -1,5 +1,0 @@
-2021-06-20T17:49:09.3068192+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Now listening on: https://localhost:5001
-2021-06-20T17:49:09.3070393+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Now listening on: http://localhost:5000
-2021-06-20T17:49:09.3070959+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Application started. Press Ctrl+C to shut down.
-2021-06-20T17:49:09.3071030+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Hosting environment: Development
-2021-06-20T17:49:09.3071169+02:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Content root path: C:\Users\MichalPC\Projekty\rt\Rc.Services.Orders\Rc.Services.Orders.Api

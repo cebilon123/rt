@@ -33,3 +33,4 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 Api/Api/Logs/*
+Rc.Services.Orders/Rc.Services.Orders.Api/Logs

@@ -51,8 +51,6 @@ namespace Rc.Services.Orders.Api
                 .AddQueryDispatcher()
                 .AddCommandHandlers()
                 .AddQueryHandlers()
-                .AddEventBroker()
-                .AddEventHandlers()
                 .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
                 .AddMongoDb(Configuration["DatabaseConnectionString"]);
             // .AddRepository<UserDocument, Guid>("users");

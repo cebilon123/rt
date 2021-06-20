@@ -3,7 +3,6 @@ using System.Net;
 using Rc.Services.Orders.Application.Exceptions.Auth;
 using Rc.Services.Orders.Application.Exceptions.User;
 using Rc.Services.Orders.Core.Exceptions;
-using Rc.Services.Orders.Core.Exceptions.UserSession;
 using ApplicationException = Rc.Services.Orders.Application.Exceptions.ApplicationException;
 
 namespace Rc.Services.Orders.Infrastructure.Errors
@@ -24,7 +23,6 @@ namespace Rc.Services.Orders.Infrastructure.Errors
         {
             return exception switch
             {
-                InvalidUserId ex => new Error(ex.Code, ex.Message, HttpStatusCode.InternalServerError),
                 _ => new Error(exception.Code, exception.Message,
                     HttpStatusCode.BadRequest)
             };

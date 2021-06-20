@@ -1,4 +1,5 @@
 using System;
+using EasyNetQ;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,9 +8,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Rc.Services.Orders.Api.Helpers.Swagger;
+using Rc.Services.Orders.Application.Services;
 using Rc.Services.Orders.Core.Repositories;
 using Rc.Services.Orders.Infrastructure.Errors;
 using Rc.Services.Orders.Infrastructure.Initialize;
+using Rc.Services.Orders.Infrastructure.Rabbit;
 using Rc.Services.Orders.Infrastructure.Repositories;
 using Rc.Services.Orders.Infrastructure.Repositories.Documents;
 
@@ -35,6 +38,8 @@ namespace Rc.Services.Orders.Api
                         fileLoggerOpts.FormatLogFileName = fName => string.Format(fName, DateTime.UtcNow);
                     });
             });
+            
+            services.AddTransient<IOrderRepository, OrderRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -50,9 +55,9 @@ namespace Rc.Services.Orders.Api
                 .AddQueryHandlers()
                 .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
                 .AddMongoDb(Configuration["DatabaseConnectionString"])
-                .AddRepository<OrderDocument, Guid>("orders");
-
-            services.AddTransient<IOrderRepository, OrderRepository>();
+                .AddRepository<OrderDocument, Guid>("orders")
+                .AddRabbitMq(Configuration["RabbitMq"])
+                .AddMessageBroker();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

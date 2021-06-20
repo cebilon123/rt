@@ -1,11 +1,14 @@
 ﻿using System;
+using EasyNetQ;
 using Microsoft.Extensions.DependencyInjection;
 using Rc.Services.Orders.Application.Handlers;
+using Rc.Services.Orders.Application.Services;
 using Rc.Services.Orders.Infrastructure.Cqrs;
+using Rc.Services.Orders.Infrastructure.Rabbit;
 
 namespace Rc.Services.Orders.Infrastructure.Initialize
 {
-    public static class CqrsExtensions
+    public static class Extensions
     {
         public static IServiceCollection AddCommandHandlers(this IServiceCollection services)
         {
@@ -36,5 +39,11 @@ namespace Rc.Services.Orders.Infrastructure.Initialize
             services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
             return services;
         }
+
+        public static IServiceCollection AddRabbitMq(this IServiceCollection services, string connectionStr)
+            => services.AddSingleton(typeof(IBus), RabbitHutch.CreateBus(connectionStr));
+
+        public static IServiceCollection AddMessageBroker(this IServiceCollection services)
+            => services.AddTransient<IMessageBroker, MessageBroker>();
     }
 }

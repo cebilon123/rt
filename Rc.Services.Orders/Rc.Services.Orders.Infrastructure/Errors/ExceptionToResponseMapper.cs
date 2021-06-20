@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Net;
-using Rc.Services.Orders.Application.Exceptions.Auth;
-using Rc.Services.Orders.Application.Exceptions.User;
 using Rc.Services.Orders.Core.Exceptions;
 using ApplicationException = Rc.Services.Orders.Application.Exceptions.ApplicationException;
 
@@ -32,8 +30,6 @@ namespace Rc.Services.Orders.Infrastructure.Errors
         {
             return exception switch
             {
-                UserNotFoundException ex => new Error(ex.Code, ex.Message, HttpStatusCode.NotFound),
-                UnauthorizedException ex => new Error(ex.Code, ex.Message, HttpStatusCode.Unauthorized),
                 _ => new Error(exception.Code, exception.Message,
                     HttpStatusCode.BadRequest)
             };

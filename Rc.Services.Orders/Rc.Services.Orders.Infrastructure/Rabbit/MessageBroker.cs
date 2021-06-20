@@ -17,7 +17,6 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
         public MessageBroker(IBus bus)
         {
             _bus = bus;
-            _bus.SendReceive.Receive<IEvent>(QueueName, p => Console.WriteLine(p));
         }
 
         public async Task PublishAsync(params IEvent[] events)

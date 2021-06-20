@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
-using Api.Core.Exceptions;
-using Api.Core.Exceptions.UserSession;
 using Rc.Services.Orders.Application.Exceptions.Auth;
 using Rc.Services.Orders.Application.Exceptions.User;
+using Rc.Services.Orders.Core.Exceptions;
+using Rc.Services.Orders.Core.Exceptions.UserSession;
 using ApplicationException = Rc.Services.Orders.Application.Exceptions.ApplicationException;
 
 namespace Rc.Services.Orders.Infrastructure.Errors

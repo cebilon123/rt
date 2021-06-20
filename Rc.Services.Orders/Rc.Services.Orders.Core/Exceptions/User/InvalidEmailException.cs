@@ -1,4 +1,4 @@
-﻿namespace Api.Core.Exceptions.User
+﻿namespace Rc.Services.Orders.Core.Exceptions.User
 {
     public class InvalidEmailException : DomainException
     {

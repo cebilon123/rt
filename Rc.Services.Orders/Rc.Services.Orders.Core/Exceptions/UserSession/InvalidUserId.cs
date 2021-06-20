@@ -1,4 +1,4 @@
-﻿namespace Api.Core.Exceptions.UserSession
+﻿namespace Rc.Services.Orders.Core.Exceptions.UserSession
 {
     public class InvalidUserId : DomainException
     {

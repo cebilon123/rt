@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Net;
-using Api.Application.Exceptions.Auth;
-using Api.Application.Exceptions.User;
 using Api.Core.Exceptions;
-using Api.Core.Exceptions.UserSession;
 using ApplicationException = Api.Application.Exceptions.ApplicationException;
 
 namespace Api.Infrastructure.Errors
@@ -25,7 +21,6 @@ namespace Api.Infrastructure.Errors
         {
             return exception switch
             {
-                InvalidUserId ex => new Error(ex.Code, ex.Message, HttpStatusCode.InternalServerError),
                 _ => new Error(exception.Code, exception.Message,
                     HttpStatusCode.BadRequest)
             };
@@ -35,8 +30,6 @@ namespace Api.Infrastructure.Errors
         {
             return exception switch
             {
-                UserNotFoundException ex => new Error(ex.Code, ex.Message, HttpStatusCode.NotFound),
-                UnauthorizedException ex => new Error(ex.Code, ex.Message, HttpStatusCode.Unauthorized),
                 _ => new Error(exception.Code, exception.Message,
                     HttpStatusCode.BadRequest)
             };

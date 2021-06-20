@@ -2,7 +2,6 @@ using System;
 using Api.Helpers.Swagger;
 using Api.Infrastructure.Errors;
 using Api.Infrastructure.Initialize;
-using Api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -51,13 +50,7 @@ namespace Api
                 .AddQueryDispatcher()
                 .AddCommandHandlers()
                 .AddQueryHandlers()
-                .AddEventBroker()
-                .AddEventHandlers()
-                .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
-                .AddMongoDb(Configuration["DatabaseConnectionString"]);
-            // .AddRepository<UserDocument, Guid>("users");
-
-            // services.AddTransient<IUserRepository, UserRepository>();
+                .AddExceptionToErrorMapper<ExceptionToResponseMapper>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

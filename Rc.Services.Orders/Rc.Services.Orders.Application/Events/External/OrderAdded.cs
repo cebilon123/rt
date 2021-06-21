@@ -12,6 +12,6 @@ namespace Rc.Services.Orders.Application.Events.External
         public bool SendNotification => true;
 
         public Notification GetNotification()
-            => new (NotificationType.Info, "Order accepted and waits for fraud check");
+            => new (NotificationType.Success, "Order accepted and waits for fraud check");
     }
 }

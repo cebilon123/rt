@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Rc.Services.Fraud.Application.DTO;
+using Rc.Services.Fraud.Application.Events.External;
 using Rc.Services.Fraud.Application.Services;
 using Rc.Services.Fraud.Infrastructure.Services.AntiFraud;
 using Rc.Services.Orders.Core.Consts;
@@ -14,12 +15,14 @@ namespace Rc.Services.Fraud.Infrastructure.Services
         private readonly IAntiFraudOrderValidator _orderValidator;
         private readonly IOrdersApi _ordersApi;
         private readonly ILogger<AntiFraudService> _logger;
+        private readonly IMessageBroker _messageBroker;
 
-        public AntiFraudService(IAntiFraudOrderValidator orderValidator, IOrdersApi ordersApi, ILogger<AntiFraudService> logger)
+        public AntiFraudService(IAntiFraudOrderValidator orderValidator, IOrdersApi ordersApi, ILogger<AntiFraudService> logger, IMessageBroker messageBroker)
         {
             _orderValidator = orderValidator;
             _ordersApi = ordersApi;
             _logger = logger;
+            _messageBroker = messageBroker;
         }
 
         public async Task ValidateOrder(OrderDto order)
@@ -39,6 +42,8 @@ namespace Rc.Services.Fraud.Infrastructure.Services
                 _logger.LogInformation($"Validating result for order: {order.Id} result: {isValid}");
 
                 await _ordersApi.SetOrderStatus(isValid ? OrderStatus.Accepted : OrderStatus.Suspended, order.Id);
+
+                await _messageBroker.PublishAsync(isValid ? new OrderAccepted() : new OrderSuspended());
             }
         }
     }

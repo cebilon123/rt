@@ -43,5 +43,13 @@ namespace Rc.Services.Orders.Api.Controllers
         [Route("all")]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetAllOrders()
             => Ok((await _queryDispatcher.QueryAsync(new GetAllOrders())).Orders);
+
+        [HttpPost]
+        [Route("status")]
+        public async Task<ActionResult> SetStatus(SetOrderStatus command)
+        {
+            await _commandDispatcher.SendAsync(command);
+            return Ok();
+        }
     }
 }

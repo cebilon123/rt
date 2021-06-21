@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Rc.Services.Fraud.Application.DTO;
 using Rc.Services.Fraud.Application.Services;
@@ -13,11 +15,13 @@ namespace Rc.Services.Fraud.Infrastructure.Services
 {
     public class OrdersApi : IOrdersApi
     {
+        private readonly ILogger<OrdersApi> _logger;
         private readonly HttpClient _client = new ();
         private readonly string _orderApiAddress;
         
-        public OrdersApi(IConfiguration configuration)
+        public OrdersApi(IConfiguration configuration, ILogger<OrdersApi> logger)
         {
+            _logger = logger;
             _orderApiAddress = configuration["OrdersApi"];
         }
         
@@ -66,9 +70,12 @@ namespace Rc.Services.Fraud.Infrastructure.Services
             return JsonConvert.DeserializeObject<List<OrderDto>>(content);
         }
 
-        public Task SetOrderStatus(string status, Guid orderId)
+        public async Task SetOrderStatus(string status, Guid orderId)
         {
-            throw new NotImplementedException();
+            var res = await _client.PostAsync($"{_orderApiAddress}/status",
+                new StringContent(JsonConvert.SerializeObject(new {id = orderId, status = status}), Encoding.Default, "application/json"));
+            
+            _logger.LogInformation(res.StatusCode.ToString());
         }
     }
 }

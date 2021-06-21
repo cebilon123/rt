@@ -5,6 +5,6 @@
         public bool SendNotification => true;
 
         public Notification GetNotification()
-            => new Notification(NotificationType.Error, "Order data was not valid");
+            => new Notification(NotificationType.Warning, "Order data was not valid");
     }
 }

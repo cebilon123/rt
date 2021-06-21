@@ -1,4 +1,5 @@
 ﻿using System;
+using EasyNetQ;
 using Hangfire;
 using Hangfire.Mongo;
 using Hangfire.Mongo.Migration.Strategies;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Rc.Services.Fraud.Application.Handlers;
 using Rc.Services.Fraud.Application.Services;
 using Rc.Services.Fraud.Infrastructure.Cqrs;
+using Rc.Services.Fraud.Infrastructure.Rabbit;
 using Rc.Services.Fraud.Infrastructure.Services;
 using Rc.Services.Fraud.Infrastructure.Services.AntiFraud;
 
@@ -53,12 +55,18 @@ namespace Rc.Services.Fraud.Infrastructure.Initialize
             services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
             return services;
         }
+        
+        public static IServiceCollection AddMessageBroker(this IServiceCollection services)
+            => services.AddTransient<IMessageBroker, MessageBroker>();
 
         public static IServiceCollection AddQueryDispatcher(this IServiceCollection services)
         {
             services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
             return services;
         }
+        
+        public static IServiceCollection AddRabbitMq(this IServiceCollection services, string connectionStr)
+            => services.AddSingleton(typeof(IBus), RabbitHutch.CreateBus(connectionStr));
 
         public static IServiceCollection AddHangfire(this IServiceCollection services, string mongoConnectionString)
         {

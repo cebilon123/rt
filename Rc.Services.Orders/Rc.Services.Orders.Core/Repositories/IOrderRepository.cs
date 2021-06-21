@@ -11,5 +11,6 @@ namespace Rc.Services.Orders.Core.Repositories
         Task<IEnumerable<Order>> GetAsyncByStatus(string status);
         Task<IEnumerable<Order>> GetAsyncByEmail(string email);
         Task<IEnumerable<Order>> GetAll();
+        Task UpdateAsync(Order order);
     }
 }

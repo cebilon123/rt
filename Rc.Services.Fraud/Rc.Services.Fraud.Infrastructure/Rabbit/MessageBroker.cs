@@ -12,7 +12,7 @@ namespace Rc.Services.Fraud.Infrastructure.Rabbit
     public class MessageBroker : IMessageBroker
     {
         private const string NotificationQueueName = "Rc.Services.Notifications";
-        private const string NotificationsExchangeName = "Orders";
+        private const string CurrentExchangeName = "Fraud";
 
         private readonly IBus _bus;
         private readonly Exchange _exchange;
@@ -21,7 +21,7 @@ namespace Rc.Services.Fraud.Infrastructure.Rabbit
         public MessageBroker(IBus bus)
         {
             _bus = bus;
-            _exchange = _bus.Advanced.ExchangeDeclare(NotificationsExchangeName, c =>
+            _exchange = _bus.Advanced.ExchangeDeclare(CurrentExchangeName, c =>
             {
                 c.WithType(ExchangeType.Fanout);
             });

@@ -21,9 +21,10 @@ namespace Rc.Services.Orders.Infrastructure.Repositories
         public Task Insert(Order order)
             => _repository.AddAsync(order.AsDocument());
 
-        public Task<Order> GetAsync(AggregateId id)
+        public async Task<Order> GetAsync(AggregateId id)
         {
-            throw new System.NotImplementedException();
+            var result = await _repository.GetAsync(o => o.Id == id);
+            return result?.AsEntity();
         }
 
         public async Task<IEnumerable<Order>> GetAsyncByStatus(string status)
@@ -34,5 +35,8 @@ namespace Rc.Services.Orders.Infrastructure.Repositories
 
         public async Task<IEnumerable<Order>> GetAll()
             => (await _repository.Collection.AsQueryable().ToListAsync()).Select(c => c.AsEntity());
+
+        public async Task UpdateAsync(Order order)
+            => await _repository.UpdateAsync(order.AsDocument());
     }
 }

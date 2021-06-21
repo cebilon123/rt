@@ -25,11 +25,27 @@ export default {
             text: t.message,
           });
           break;
+        case 1:
+          this.$notify({
+            type: "warning",
+            group: "notify",
+            title: "Warning",
+            text: t.message,
+          });
+          break;
         case 2:
           this.$notify({
             type: "error",
             group: "notify",
             title: "Error",
+            text: t.message,
+          });
+          break;
+        case 3:
+          this.$notify({
+            type: "success",
+            group: "notify",
+            title: "Success",
             text: t.message,
           });
           break;

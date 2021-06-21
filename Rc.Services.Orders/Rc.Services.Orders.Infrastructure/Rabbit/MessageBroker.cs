@@ -16,7 +16,7 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
     {
         private const string NotificationQueueName = "Rc.Services.Notifications";
         private const string OrdersQueueName = "Rc.Services.Orders";
-        private const string NotificationsExchangeName = "Orders";
+        private const string CurrentExchangeName = "Orders";
 
         private readonly IBus _bus;
         private readonly Exchange _exchange;
@@ -25,7 +25,7 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
         public MessageBroker(IBus bus)
         {
             _bus = bus;
-            _exchange = _bus.Advanced.ExchangeDeclare(NotificationsExchangeName, c =>
+            _exchange = _bus.Advanced.ExchangeDeclare(CurrentExchangeName, c =>
             {
                 c.WithType(ExchangeType.Fanout);
             });

@@ -12,7 +12,7 @@ namespace Rc.Services.Orders.Core.Domain
         public string Email { get; }
         public decimal Amount { get; }
         public Address Address { get; }
-        public string Status { get; }
+        public string Status { get; private set; }
 
         private ISet<Product> _products = new HashSet<Product>();
 
@@ -22,7 +22,7 @@ namespace Rc.Services.Orders.Core.Domain
             private set => _products = new HashSet<Product>(value);
         }
 
-        public Order(string email, decimal amount, Address address, IEnumerable<Product> products, string status = "new", int version = 0)
+        public Order(Guid id, string email, decimal amount, Address address, IEnumerable<Product> products, string status = "new", int version = 0)
         {
             ValidateProducts(products);
 
@@ -35,7 +35,13 @@ namespace Rc.Services.Orders.Core.Domain
             Products = products;
             Version = version;
             Status = status;
-            Id = Guid.NewGuid();
+            Id = id;
+        }
+
+        public void SetStatus(string status)
+        {
+            Status = status;
+            AddEvent(new OrderUpdated(this));
         }
 
         private static void ValidateProducts(IEnumerable<Product> products)
@@ -49,7 +55,7 @@ namespace Rc.Services.Orders.Core.Domain
 
         public static Order Create(string email, decimal amount, Address address, IEnumerable<Product> products)
         {
-            var order = new Order(email, amount, address, products);
+            var order = new Order(Guid.NewGuid(),email, amount, address, products);
             order.AddEvent(new OrderCreated(order));
             return order;
         }

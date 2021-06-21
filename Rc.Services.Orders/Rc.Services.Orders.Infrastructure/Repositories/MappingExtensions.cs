@@ -19,7 +19,7 @@ namespace Rc.Services.Orders.Infrastructure.Repositories
             };
 
         public static Order AsEntity(this OrderDocument orderDocument)
-            => new(orderDocument.Email, orderDocument.Amount, orderDocument.Address.AsEntity(),
+            => new(orderDocument.Id,orderDocument.Email, orderDocument.Amount, orderDocument.Address.AsEntity(),
                 orderDocument.Products.Select(c => c.AsEntity()),
                 orderDocument.Status, orderDocument.Version);
 

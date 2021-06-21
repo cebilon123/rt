@@ -55,10 +55,11 @@ namespace Rc.Services.Fraud.Api
                 .AddQueryHandlers()
                 .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
                 .AddMongoDb(Configuration["DatabaseConnectionString"])
-                .AddTransient<IOrdersApi,OrdersApi>()
+                .AddTransient<IOrdersApi, OrdersApi>()
                 .RegisterAntiFraudRules()
                 .RegisterAntiFraudOrderValidator()
-                .RegisterAntiFraudService();
+                .RegisterAntiFraudService()
+                .AddHangfire(Configuration["DatabaseConnectionString"]);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

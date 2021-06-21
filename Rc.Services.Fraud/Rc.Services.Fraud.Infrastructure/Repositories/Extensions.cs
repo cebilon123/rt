@@ -19,7 +19,7 @@ namespace Rc.Services.Fraud.Infrastructure.Repositories
         {
             return services.AddTransient<IMongoGenericRepository<TEntity, TIdentifiable>>(sp =>
             {
-                var database = sp.GetService<IMongoClient>()?.GetDatabase("omniok_main");
+                var database = sp.GetService<IMongoClient>()?.GetDatabase("rc_service_fraud");
 
                 if (database is null)
                     throw new InfrastructureException("Database_not_found", typeof(IMongoDatabase));

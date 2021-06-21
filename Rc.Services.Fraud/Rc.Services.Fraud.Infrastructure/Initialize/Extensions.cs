@@ -1,4 +1,6 @@
 ﻿using System;
+using Hangfire;
+using Hangfire.Mongo;
 using Microsoft.Extensions.DependencyInjection;
 using Rc.Services.Fraud.Application.Handlers;
 using Rc.Services.Fraud.Application.Services;
@@ -52,6 +54,18 @@ namespace Rc.Services.Fraud.Infrastructure.Initialize
         public static IServiceCollection AddQueryDispatcher(this IServiceCollection services)
         {
             services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
+            return services;
+        }
+
+        public static IServiceCollection AddHangfire(this IServiceCollection services, string mongoConnectionString)
+        {
+            services.AddHangfire(c => c.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseMongoStorage(mongoConnectionString));
+
+            services.AddHangfireServer();
+            
             return services;
         }
     }

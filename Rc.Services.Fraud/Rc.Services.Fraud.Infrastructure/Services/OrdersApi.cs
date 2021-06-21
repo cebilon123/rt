@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
@@ -63,6 +64,11 @@ namespace Rc.Services.Fraud.Infrastructure.Services
                 return new List<OrderDto>();
             
             return JsonConvert.DeserializeObject<List<OrderDto>>(content);
+        }
+
+        public Task SetOrderStatus(string status, Guid orderId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -62,7 +63,7 @@ namespace Rc.Services.Fraud.Api
                 .AddHangfire(Configuration["DatabaseConnectionString"]);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs)
         {
             if (env.IsDevelopment())
             {
@@ -79,6 +80,10 @@ namespace Rc.Services.Fraud.Api
                     .AllowCredentials();
             });
 
+            app.UseDashboardHangfire();
+            
+            RecurringJob.AddOrUpdate(() => app.ApplicationServices.GetService<IAntiFraudService>().ValidateNewOrders(), "* * * * *" );
+            
             app.UseHttpsRedirection();
 
             app.ApplicationServices.GetService(typeof(IAntiFraudService));
@@ -88,7 +93,9 @@ namespace Rc.Services.Fraud.Api
             app.UseAuthorization();
 
             app.UseMiddleware<ExceptionMiddleware>();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers();
+                endpoints.MapHangfireDashboard();
+            });
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 using Hangfire;
 using Hangfire.Mongo;
+using Hangfire.Mongo.Migration.Strategies;
+using Hangfire.Mongo.Migration.Strategies.Backup;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Rc.Services.Fraud.Application.Handlers;
 using Rc.Services.Fraud.Application.Services;
@@ -41,7 +44,7 @@ namespace Rc.Services.Fraud.Infrastructure.Initialize
 
         public static IServiceCollection RegisterAntiFraudOrderValidator(this IServiceCollection services)
             => services.AddTransient<IAntiFraudOrderValidator, AntiFraudOrderValidator>();
-        
+
         public static IServiceCollection RegisterAntiFraudService(this IServiceCollection services)
             => services.AddTransient<IAntiFraudService, AntiFraudService>();
 
@@ -62,11 +65,21 @@ namespace Rc.Services.Fraud.Infrastructure.Initialize
             services.AddHangfire(c => c.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
-                .UseMongoStorage(mongoConnectionString));
+                .UseMongoStorage($"{mongoConnectionString}/rc_services_fraud", new MongoStorageOptions
+                {
+                    MigrationOptions = new MongoMigrationOptions
+                    {
+                        MigrationStrategy = new DropMongoMigrationStrategy(),
+                        BackupStrategy = new CollectionMongoBackupStrategy()
+                    }
+                }));
 
             services.AddHangfireServer();
-            
+
             return services;
         }
+
+        public static IApplicationBuilder UseDashboardHangfire(this IApplicationBuilder app)
+            => app.UseHangfireDashboard();
     }
 }

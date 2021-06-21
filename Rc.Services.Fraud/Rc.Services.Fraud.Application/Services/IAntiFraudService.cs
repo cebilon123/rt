@@ -6,5 +6,6 @@ namespace Rc.Services.Fraud.Application.Services
     public interface IAntiFraudService
     {
         Task ValidateOrder(OrderDto order);
+        Task ValidateNewOrders();
     }
 }

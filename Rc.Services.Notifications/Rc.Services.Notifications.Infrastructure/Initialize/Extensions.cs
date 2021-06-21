@@ -40,9 +40,9 @@ namespace Rc.Services.Notifications.Infrastructure.Initialize
             return services;
         }
 
-        public static IServiceCollection AddMessageBroker(this IServiceCollection services)
+        public static IServiceCollection AddEventListener(this IServiceCollection services)
         {
-            return services.AddSingleton<IMessageBroker, MessageBroker>();
+            return services.AddSingleton<IMessageListener, MessageListener>();
         }
         
         public static IServiceCollection AddEventHandlers(this IServiceCollection services)

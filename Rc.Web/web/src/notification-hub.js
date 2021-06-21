@@ -22,14 +22,14 @@ export default {
         }
         connection.onclose(() => start())
 
-        connection.on('test', t => notifyHub.$emit('test', t))
-        notifyHub.test = () => {
-            if(!startedPromise) return
+        connection.on('Notification', t => notifyHub.$emit('Notification', t))
+        // notifyHub.test = () => {
+        //     if(!startedPromise) return
 
-            startedPromise.then(() => {
-                connection.invoke('test')
-            })
-        }
+        //     startedPromise.then(() => {
+        //         connection.invoke('test')
+        //     })
+        // }
 
         start()
     }

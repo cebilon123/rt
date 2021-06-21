@@ -1,20 +1,22 @@
 ﻿using System.Threading.Tasks;
+using Api.Application.Hubs;
 using Api.Application.Services;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Application.Handlers.Events.External.Handlers
 {
     public class NotificationEventHandler : IEventHandler<Notification>
     {
-        private readonly IHubContextAccessor _accessor;
+        private readonly IHubContext<Notifications> _hub;
 
-        public NotificationEventHandler(IHubContextAccessor accessor)
+        public NotificationEventHandler(IHubContext<Notifications> hub)
         {
-            _accessor = accessor;
+            _hub = hub;
         }
         
-        public Task OnEvent(Notification @event)
+        public async Task OnEvent(Notification @event)
         {
-            throw new System.NotImplementedException();
+            await _hub.Clients.All.SendAsync("Notification",@event);
         }
     }
 }

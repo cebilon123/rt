@@ -22,8 +22,8 @@ export default {
       text: 'Hello user! This is a notification!'
     });
 
-    this.$notificationHub.$on('test', t => console.log(t))
-    this.$notificationHub.test('test')
+    this.$notificationHub.$on('Notification', t => console.log(t))
+    
   },
 }
 </script>

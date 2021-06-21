@@ -56,8 +56,7 @@ namespace Rc.Services.Notifications.Api
                 .AddQueryHandlers()
                 .AddEventHandlers()
                 .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
-                .AddMessageBroker()
-                .AddTransient<IHubContextAccessor, HubContextAccessor>()
+                .AddEventListener()
                 .AddSignalR();
         }
 
@@ -81,12 +80,13 @@ namespace Rc.Services.Notifications.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseMiddleware<ExceptionMiddleware>();
+
+            app.ApplicationServices.GetService<IMessageListener>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<Hubs.Notifications>("/notification-hub");
+                endpoints.MapHub<global::Api.Application.Hubs.Notifications>("/notification-hub");
             });
         }
     }

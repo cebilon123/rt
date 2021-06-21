@@ -34,5 +34,9 @@ namespace Rc.Services.Orders.Api.Controllers
         [Route("new")]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersWithStatusNew()
             => Ok((await _queryDispatcher.QueryAsync(new GetOrdersWithStatusNew())).Orders);
+        
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersByEmail([FromQuery]string email)
+            => Ok((await _queryDispatcher.QueryAsync(new GetOrdersByEmail(email))).Orders);
     }
 }

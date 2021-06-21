@@ -27,5 +27,8 @@ namespace Rc.Services.Orders.Infrastructure.Repositories
 
         public async Task<IEnumerable<Order>> GetAsyncByStatus(string status)
             => (await _repository.FindAsync(o => o.Status == status)).Select(c => c.AsEntity());
+
+        public async Task<IEnumerable<Order>> GetAsyncByEmail(string email)
+            => (await _repository.FindAsync(o => o.Email == email)).ToList().Select(c => c.AsEntity());
     }
 }

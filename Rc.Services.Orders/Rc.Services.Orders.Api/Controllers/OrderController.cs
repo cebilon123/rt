@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rc.Services.Orders.Api.Attributes;
 using Rc.Services.Orders.Application.Handlers;
 using Rc.Services.Orders.Application.Handlers.Commands;
+using Rc.Services.Orders.Application.Handlers.Queries;
 
 namespace Rc.Services.Orders.Api.Controllers
 {
@@ -11,10 +12,12 @@ namespace Rc.Services.Orders.Api.Controllers
     public class OrderController : ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;
+        private readonly IQueryDispatcher _queryDispatcher;
 
-        public OrderController(ICommandDispatcher commandDispatcher)
+        public OrderController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
         {
             _commandDispatcher = commandDispatcher;
+            _queryDispatcher = queryDispatcher;
         }
         
         [HttpPost]
@@ -24,5 +27,10 @@ namespace Rc.Services.Orders.Api.Controllers
             await _commandDispatcher.SendAsync(createOrder);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("new")]
+        public async Task<ActionResult<GetOrdersWithStatusNewResult>> GetOrdersWithStatusNew()
+            => Ok(await _queryDispatcher.QueryAsync(new GetOrdersWithStatusNew()));
     }
 }

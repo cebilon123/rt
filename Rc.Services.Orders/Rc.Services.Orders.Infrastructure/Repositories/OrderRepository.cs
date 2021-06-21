@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Rc.Services.Orders.Core.Domain;
 using Rc.Services.Orders.Core.Repositories;
@@ -22,5 +24,8 @@ namespace Rc.Services.Orders.Infrastructure.Repositories
         {
             throw new System.NotImplementedException();
         }
+
+        public async Task<IEnumerable<Order>> GetAsyncByStatus(string status)
+            => (await _repository.FindAsync(o => o.Status == status)).Select(c => c.AsEntity());
     }
 }

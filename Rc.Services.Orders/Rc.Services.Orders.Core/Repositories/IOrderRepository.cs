@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Rc.Services.Orders.Core.Domain;
 
 namespace Rc.Services.Orders.Core.Repositories
@@ -7,5 +8,6 @@ namespace Rc.Services.Orders.Core.Repositories
     {
         Task Insert(Order order);
         Task<Order> GetAsync(AggregateId id);
+        Task<IEnumerable<Order>> GetAsyncByStatus(string status);
     }
 }

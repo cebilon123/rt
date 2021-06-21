@@ -9,8 +9,4 @@
       <ProjectReference Include="..\Rc.Services.Orders.Core\Rc.Services.Orders.Core.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Handlers\Queries\Handlers" />
-    </ItemGroup>
-
 </Project>

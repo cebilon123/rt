@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Driver;
 using Rc.Services.Orders.Core.Domain;
 using Rc.Services.Orders.Core.Repositories;
 using Rc.Services.Orders.Infrastructure.Repositories.Documents;
@@ -30,5 +31,8 @@ namespace Rc.Services.Orders.Infrastructure.Repositories
 
         public async Task<IEnumerable<Order>> GetAsyncByEmail(string email)
             => (await _repository.FindAsync(o => o.Email == email)).ToList().Select(c => c.AsEntity());
+
+        public async Task<IEnumerable<Order>> GetAll()
+            => (await _repository.Collection.AsQueryable().ToListAsync()).Select(c => c.AsEntity());
     }
 }

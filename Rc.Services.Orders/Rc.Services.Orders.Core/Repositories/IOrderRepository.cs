@@ -10,5 +10,6 @@ namespace Rc.Services.Orders.Core.Repositories
         Task<Order> GetAsync(AggregateId id);
         Task<IEnumerable<Order>> GetAsyncByStatus(string status);
         Task<IEnumerable<Order>> GetAsyncByEmail(string email);
+        Task<IEnumerable<Order>> GetAll();
     }
 }

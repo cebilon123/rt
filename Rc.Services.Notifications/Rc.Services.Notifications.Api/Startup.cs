@@ -1,5 +1,6 @@
 using System;
 using Api.Helpers.Swagger;
+using Api.Hubs;
 using Api.Infrastructure.Errors;
 using Api.Infrastructure.Initialize;
 using Microsoft.AspNetCore.Builder;
@@ -50,7 +51,8 @@ namespace Api
                 .AddQueryDispatcher()
                 .AddCommandHandlers()
                 .AddQueryHandlers()
-                .AddExceptionToErrorMapper<ExceptionToResponseMapper>();
+                .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
+                .AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,16 +63,25 @@ namespace Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
             }
-
-
+            
+            app.UseCors(c =>
+            {
+                c.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins("http://localhost:8080")
+                    .AllowCredentials();
+            });
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseMiddleware<ExceptionMiddleware>();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<Notifications>("/notification-hub");
+            });
         }
     }
 }

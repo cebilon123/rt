@@ -1,4 +1,5 @@
 using System;
+using Api.Application.Services;
 using EasyNetQ;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Rc.Services.Notifications.Api.Helpers.Swagger;
 using Rc.Services.Notifications.Infrastructure.Errors;
 using Rc.Services.Notifications.Infrastructure.Initialize;
+using Rc.Services.Notifications.Infrastructure.Services;
 
 namespace Rc.Services.Notifications.Api
 {
@@ -55,6 +57,7 @@ namespace Rc.Services.Notifications.Api
                 .AddEventHandlers()
                 .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
                 .AddMessageBroker()
+                .AddTransient<IHubContextAccessor, HubContextAccessor>()
                 .AddSignalR();
         }
 

@@ -13,5 +13,9 @@
     <ItemGroup>
       <ProjectReference Include="..\Rc.Services.Notifications.Core\Rc.Services.Notifications.Core.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    </ItemGroup>
 
 </Project>

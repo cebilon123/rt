@@ -42,7 +42,7 @@ namespace Rc.Services.Notifications.Infrastructure.Initialize
 
         public static IServiceCollection AddMessageBroker(this IServiceCollection services)
         {
-            return services.AddTransient<IMessageBroker, MessageBroker>();
+            return services.AddSingleton<IMessageBroker, MessageBroker>();
         }
         
         public static IServiceCollection AddEventHandlers(this IServiceCollection services)

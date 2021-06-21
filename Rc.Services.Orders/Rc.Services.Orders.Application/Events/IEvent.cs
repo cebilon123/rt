@@ -1,10 +1,10 @@
-﻿namespace Rc.Services.Orders.Application.Events
+﻿using Rc.Services.Orders.Application.Events.External;
+
+namespace Rc.Services.Orders.Application.Events
 {
-    /// <summary>
-    /// Marker
-    /// </summary>
     public interface IEvent
     {
-        
+        bool SendNotification { get; }
+        Notification GetNotification();
     }
 }

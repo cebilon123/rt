@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ;
 using Rc.Services.Orders.Application.Events;
+using Rc.Services.Orders.Application.Events.External;
 using Rc.Services.Orders.Application.Services;
 
 namespace Rc.Services.Orders.Infrastructure.Rabbit
@@ -12,6 +13,8 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
     public class MessageBroker : IMessageBroker
     {
         private const string QueueName = "Rc.Services.Orders";
+        private const string NotificationsQueueName = "Rc.Services.Notifications";
+
         private readonly IBus _bus;
 
         public MessageBroker(IBus bus)
@@ -33,6 +36,9 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
                     continue;
 
                 await _bus.SendReceive.SendAsync(QueueName, @event);
+                
+                if (@event.SendNotification)
+                    await _bus.SendReceive.SendAsync(NotificationsQueueName, @event.GetNotification());
             }
         }
     }

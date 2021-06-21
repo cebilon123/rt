@@ -59,9 +59,6 @@ namespace Rc.Services.Fraud.Api
                 .RegisterAntiFraudRules()
                 .RegisterAntiFraudOrderValidator()
                 .RegisterAntiFraudService();
-            // .AddRepository<UserDocument, Guid>("users");
-
-            // services.AddTransient<IUserRepository, UserRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

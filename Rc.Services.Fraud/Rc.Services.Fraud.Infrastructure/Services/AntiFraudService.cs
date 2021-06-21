@@ -16,6 +16,6 @@ namespace Rc.Services.Fraud.Infrastructure.Services
         }
 
         public async Task ValidateOrder(OrderDto order)
-            => _orderValidator.IsValidOrder(order);
+            => await _orderValidator.IsValidOrder(order);
     }
 }

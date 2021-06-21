@@ -22,7 +22,7 @@ namespace Rc.Services.Fraud.Infrastructure.Services
         
         public async Task<IEnumerable<OrderDto>> GetOrdersWithStatusNew()
         {
-            var response = await _client.GetAsync($"{_orderApiAddress}new");
+            var response = await _client.GetAsync($"{_orderApiAddress}/new");
 
             if (!response.IsSuccessStatusCode)
                 return new List<OrderDto>();
@@ -35,14 +35,34 @@ namespace Rc.Services.Fraud.Infrastructure.Services
             return JsonConvert.DeserializeObject<List<OrderDto>>(content);
         }
 
-        public Task<IEnumerable<OrderDto>> GetOrdersForEmail(string email)
+        public async Task<IEnumerable<OrderDto>> GetOrdersForEmail(string email)
         {
-            throw new System.NotImplementedException();
+            var response = await _client.GetAsync($"{_orderApiAddress}?email={email}");
+
+            if (!response.IsSuccessStatusCode)
+                return new List<OrderDto>();
+
+            var content = await response.Content.ReadAsStringAsync();
+            
+            if(string.IsNullOrEmpty(content))
+                return new List<OrderDto>();
+            
+            return JsonConvert.DeserializeObject<List<OrderDto>>(content);
         }
 
-        public Task<IEnumerable<OrderDto>> FetchAll()
+        public async Task<IEnumerable<OrderDto>> FetchAll()
         {
-            throw new System.NotImplementedException();
+            var response = await _client.GetAsync($"{_orderApiAddress}/all");
+
+            if (!response.IsSuccessStatusCode)
+                return new List<OrderDto>();
+
+            var content = await response.Content.ReadAsStringAsync();
+            
+            if(string.IsNullOrEmpty(content))
+                return new List<OrderDto>();
+            
+            return JsonConvert.DeserializeObject<List<OrderDto>>(content);
         }
     }
 }

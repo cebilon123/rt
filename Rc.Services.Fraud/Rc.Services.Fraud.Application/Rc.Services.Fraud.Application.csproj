@@ -18,4 +18,8 @@
       <ProjectReference Include="..\Rc.Services.Fraud.Core\Rc.Services.Fraud.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
 </Project>

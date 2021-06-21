@@ -35,3 +35,4 @@ Desktop.ini
 Api/Api/Logs/*
 Rc.Services.Orders/Rc.Services.Orders.Api/Logs
 Rc.Services.Notifications/Rc.Services.Notifications.Api/Logs
+Rc.Services.Fraud/Rc.Services.Fraud.Api/Logs

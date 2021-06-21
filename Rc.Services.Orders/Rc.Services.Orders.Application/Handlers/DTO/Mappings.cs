@@ -13,7 +13,8 @@ namespace Rc.Services.Orders.Application.Handlers.DTO
                 Id = order.Id,
                 Products = order.Products.Select(p => p.ToDto()),
                 Status = order.Status,
-                Email = order.Email
+                Email = order.Email,
+                Address = order.Address.ToDto()
             };
 
         public static ProductDto ToDto(this Product product)
@@ -21,6 +22,15 @@ namespace Rc.Services.Orders.Application.Handlers.DTO
             {
                 Name = product.Name,
                 Quantity = product.Quantity
+            };
+
+        public static AddressDto ToDto(this Address address)
+            => new()
+            {
+                City = address.City,
+                Country = address.Country,
+                Street = address.Street,
+                ZipCode = address.ZipCode
             };
     }
 }

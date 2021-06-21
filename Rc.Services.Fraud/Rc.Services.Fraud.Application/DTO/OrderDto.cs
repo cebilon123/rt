@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Rc.Services.Orders.Application.Handlers.DTO;
 
-namespace Rc.Services.Orders.Application.Handlers.DTO
+namespace Rc.Services.Fraud.Application.DTO
 {
     public class OrderDto
     {

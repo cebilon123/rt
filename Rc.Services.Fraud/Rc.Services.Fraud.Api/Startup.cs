@@ -7,9 +7,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Rc.Services.Fraud.Api.Helpers.Swagger;
+using Rc.Services.Fraud.Application.Services;
 using Rc.Services.Fraud.Infrastructure.Errors;
 using Rc.Services.Fraud.Infrastructure.Initialize;
 using Rc.Services.Fraud.Infrastructure.Repositories;
+using Rc.Services.Fraud.Infrastructure.Services;
 
 namespace Rc.Services.Fraud.Api
 {
@@ -52,7 +54,11 @@ namespace Rc.Services.Fraud.Api
                 .AddCommandHandlers()
                 .AddQueryHandlers()
                 .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
-                .AddMongoDb(Configuration["DatabaseConnectionString"]);
+                .AddMongoDb(Configuration["DatabaseConnectionString"])
+                .AddTransient<IOrdersApi,OrdersApi>()
+                .RegisterAntiFraudRules()
+                .RegisterAntiFraudOrderValidator()
+                .RegisterAntiFraudService();
             // .AddRepository<UserDocument, Guid>("users");
 
             // services.AddTransient<IUserRepository, UserRepository>();
@@ -76,6 +82,8 @@ namespace Rc.Services.Fraud.Api
             });
 
             app.UseHttpsRedirection();
+
+            app.ApplicationServices.GetService(typeof(IAntiFraudService));
 
             app.UseRouting();
 

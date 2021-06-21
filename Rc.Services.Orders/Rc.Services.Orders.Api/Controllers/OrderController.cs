@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rc.Services.Orders.Api.Attributes;
 using Rc.Services.Orders.Application.Handlers;
 using Rc.Services.Orders.Application.Handlers.Commands;
+using Rc.Services.Orders.Application.Handlers.DTO;
 using Rc.Services.Orders.Application.Handlers.Queries;
 
 namespace Rc.Services.Orders.Api.Controllers
@@ -30,7 +32,7 @@ namespace Rc.Services.Orders.Api.Controllers
 
         [HttpGet]
         [Route("new")]
-        public async Task<ActionResult<GetOrdersWithStatusNewResult>> GetOrdersWithStatusNew()
-            => Ok(await _queryDispatcher.QueryAsync(new GetOrdersWithStatusNew()));
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersWithStatusNew()
+            => Ok((await _queryDispatcher.QueryAsync(new GetOrdersWithStatusNew())).Orders);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Rc.Services.Orders.Application.Handlers.DTO
+﻿namespace Rc.Services.Fraud.Application.DTO
 {
     public class AddressDto
     {

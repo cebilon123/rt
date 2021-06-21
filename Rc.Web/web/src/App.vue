@@ -16,18 +16,20 @@ export default {
   },
 
   mounted() {
-    this.$notify({
-      group: "notify",
-      title: "Important message",
-      text: "Hello user! This is a notification!",
-    });
-
     this.$notificationHub.$on("Notification", (t) => {
       switch (t.type) {
         case 0:
           this.$notify({
             group: "notify",
             title: "Information",
+            text: t.message,
+          });
+          break;
+        case 2:
+          this.$notify({
+            type: "error",
+            group: "notify",
+            title: "Error",
             text: t.message,
           });
           break;

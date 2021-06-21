@@ -14,13 +14,13 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
 {
     public class MessageBroker : IMessageBroker
     {
-        private const string QueueName = "Rc.Services.Orders";
-        private const string NotificationsQueueName = "Rc.Services.Notifications";
-        private const string NotificationsExchangeName = "Notifications";
+        private const string NotificationQueueName = "Rc.Services.Notifications";
+        private const string OrdersQueueName = "Rc.Services.Orders";
+        private const string NotificationsExchangeName = "Orders";
 
         private readonly IBus _bus;
         private readonly Exchange _exchange;
-        private readonly Queue _queue;
+        private readonly Queue _notificationQueue;
 
         public MessageBroker(IBus bus)
         {
@@ -30,9 +30,9 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
                 c.WithType(ExchangeType.Fanout);
             });
 
-            _queue = _bus.Advanced.QueueDeclare(NotificationsQueueName);
+            _notificationQueue = _bus.Advanced.QueueDeclare(NotificationQueueName);
 
-            _bus.Advanced.Bind(_exchange, _queue, "A.*");
+            _bus.Advanced.Bind(_exchange, _notificationQueue, "A.*");
         }
 
         public async Task PublishAsync(params IEvent[] events)
@@ -48,11 +48,11 @@ namespace Rc.Services.Orders.Infrastructure.Rabbit
                 if (@event is null)
                     continue;
 
-                await _bus.SendReceive.SendAsync(QueueName, @event);
+                await _bus.SendReceive.SendAsync(OrdersQueueName, @event);
 
                 if (@event.SendNotification)
                 {
-                    await _bus.Advanced.PublishAsync(_exchange, NotificationsQueueName,true, new Message<string>(JsonConvert.SerializeObject(@event.GetNotification())));
+                    await _bus.Advanced.PublishAsync(_exchange, NotificationQueueName,true, new Message<string>(JsonConvert.SerializeObject(@event.GetNotification())));
                 }
             }
         }

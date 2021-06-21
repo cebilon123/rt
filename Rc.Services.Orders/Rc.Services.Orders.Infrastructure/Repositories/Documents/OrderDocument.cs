@@ -10,6 +10,7 @@ namespace Rc.Services.Orders.Infrastructure.Repositories.Documents
         public string Email { get; set; }
         public decimal Amount { get; set; }
         public Address Address { get; set; }
+        public string Status { get; set; }
 
         public List<Product> Products { get; set; }
     }

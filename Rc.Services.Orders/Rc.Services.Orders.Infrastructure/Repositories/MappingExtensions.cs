@@ -14,7 +14,8 @@ namespace Rc.Services.Orders.Infrastructure.Repositories
                 Email = order.Email,
                 Id = order.Id,
                 Products = order.Products.Select(c => c.AsDocumentProduct()).ToList(),
-                Version = order.Version
+                Version = order.Version,
+                Status = order.Status
             };
 
         public static Address AsDocumentAddress(this Core.ValueTypes.Address address)

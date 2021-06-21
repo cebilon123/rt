@@ -11,7 +11,8 @@ namespace Rc.Services.Orders.Core.Domain
     {
         public string Email { get; }
         public decimal Amount { get; }
-        public Address Address { get; set; }
+        public Address Address { get; }
+        public string Status { get; }
 
         private ISet<Product> _products = new HashSet<Product>();
 
@@ -21,7 +22,7 @@ namespace Rc.Services.Orders.Core.Domain
             private set => _products = new HashSet<Product>(value);
         }
 
-        public Order(string email, decimal amount, Address address, IEnumerable<Product> products, int version = 0)
+        public Order(string email, decimal amount, Address address, IEnumerable<Product> products, string status = "new", int version = 0)
         {
             ValidateProducts(products);
 
@@ -33,6 +34,7 @@ namespace Rc.Services.Orders.Core.Domain
             Address = address;
             Products = products;
             Version = version;
+            Status = status;
             Id = Guid.NewGuid();
         }
 

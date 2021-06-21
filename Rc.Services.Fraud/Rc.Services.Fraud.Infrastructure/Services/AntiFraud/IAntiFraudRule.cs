@@ -1,9 +1,10 @@
-﻿using Rc.Services.Fraud.Application.DTO;
+﻿using System.Threading.Tasks;
+using Rc.Services.Fraud.Application.DTO;
 
 namespace Rc.Services.Fraud.Infrastructure.Services.AntiFraud
 {
     public interface IAntiFraudRule
     {
-        bool IsValid(OrderDto orderDto);
+        Task<bool> IsValid(OrderDto orderDto);
     }
 }

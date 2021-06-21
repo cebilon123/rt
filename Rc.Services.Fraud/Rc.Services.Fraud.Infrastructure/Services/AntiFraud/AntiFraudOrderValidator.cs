@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Rc.Services.Fraud.Application.DTO;
 
@@ -14,12 +15,18 @@ namespace Rc.Services.Fraud.Infrastructure.Services.AntiFraud
             _scopeFactory = scopeFactory;
         }
 
-        public bool IsValidOrder(OrderDto orderDto)
+        public async Task<bool> IsValidOrder(OrderDto orderDto)
         {
             using var scope = _scopeFactory.CreateScope();
             var rules = scope.ServiceProvider.GetServices<IAntiFraudRule>();
 
-            return rules.All(r => r.IsValid(orderDto));
+            foreach (var rule in rules)
+            {
+                if (!await rule.IsValid(orderDto))
+                    return false;
+            }
+
+            return true;
         }
             
     }

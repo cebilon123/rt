@@ -13,8 +13,4 @@
       <ProjectReference Include="..\Rc.Services.Fraud.Infrastructure\Rc.Services.Fraud.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Controllers" />
-    </ItemGroup>
-
 </Project>

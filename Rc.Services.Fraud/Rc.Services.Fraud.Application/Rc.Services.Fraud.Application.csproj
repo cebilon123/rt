@@ -6,12 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Attributes" />
       <Folder Include="Handlers\CommandHandlers" />
       <Folder Include="Handlers\Commands" />
       <Folder Include="Handlers\Queries" />
       <Folder Include="Handlers\QueryHandlers" />
-      <Folder Include="Helpers" />
     </ItemGroup>
 
     <ItemGroup>

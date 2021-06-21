@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Rc.Services.Fraud.Api.Helpers.Swagger;
 using Rc.Services.Fraud.Application.Services;
 using Rc.Services.Fraud.Infrastructure.Errors;
 using Rc.Services.Fraud.Infrastructure.Initialize;
@@ -46,7 +45,6 @@ namespace Rc.Services.Fraud.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Api", Version = "v1"});
-                c.OperationFilter<ApplySwaggerDescriptionFilter>();
             });
             services
                 .AddHttpContextAccessor()

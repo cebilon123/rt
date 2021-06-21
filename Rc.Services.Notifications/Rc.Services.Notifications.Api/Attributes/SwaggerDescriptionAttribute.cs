@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Attributes
+namespace Rc.Services.Notifications.Api.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class SwaggerDescriptionAttribute : Attribute

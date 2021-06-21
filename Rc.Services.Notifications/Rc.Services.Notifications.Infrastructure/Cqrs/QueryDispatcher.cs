@@ -5,7 +5,7 @@ using Api.Application.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 
 #pragma warning disable 8600
-namespace Api.Infrastructure.Cqrs
+namespace Rc.Services.Notifications.Infrastructure.Cqrs
 {
     public class QueryDispatcher : IQueryDispatcher
     {

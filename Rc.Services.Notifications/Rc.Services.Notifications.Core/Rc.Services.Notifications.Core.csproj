@@ -5,10 +5,4 @@
         <RootNamespace>Rc.Services.Notifications.Core</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Domain" />
-      <Folder Include="Repositories" />
-      <Folder Include="ValueTypes" />
-    </ItemGroup>
-
 </Project>

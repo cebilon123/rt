@@ -5,6 +5,7 @@
     </PropertyGroup>
     
     <ItemGroup>
+      <PackageReference Include="EasyNetQ" Version="7.0.0-alpha4" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
       <PackageReference Include="MongoDB.Bson" Version="2.13.0-beta1" />

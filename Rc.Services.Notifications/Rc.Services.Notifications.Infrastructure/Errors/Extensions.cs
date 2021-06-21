@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Api.Infrastructure.Errors
+namespace Rc.Services.Notifications.Infrastructure.Errors
 {
     public static class Extensions
     {

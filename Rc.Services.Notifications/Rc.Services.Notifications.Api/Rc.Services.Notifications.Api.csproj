@@ -12,8 +12,4 @@
     <ItemGroup>
       <ProjectReference Include="..\Rc.Services.Notifications.Infrastructure\Rc.Services.Notifications.Infrastructure.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controllers" />
-    </ItemGroup>
 </Project>

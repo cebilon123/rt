@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Infrastructure.Errors.Exceptions
+namespace Rc.Services.Notifications.Infrastructure.Errors.Exceptions
 {
     public class InfrastructureException : Exception
     {

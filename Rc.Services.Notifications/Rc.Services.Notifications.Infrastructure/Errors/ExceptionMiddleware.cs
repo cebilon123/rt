@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Api.Infrastructure.Errors
+namespace Rc.Services.Notifications.Infrastructure.Errors
 {
     public class ExceptionMiddleware
     {

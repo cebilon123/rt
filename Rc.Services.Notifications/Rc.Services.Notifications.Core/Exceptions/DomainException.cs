@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Core.Exceptions
+namespace Rc.Services.Notifications.Core.Exceptions
 {
     public abstract class DomainException : Exception
     {

@@ -1,11 +1,14 @@
 ﻿using System;
 using Api.Application.Handlers;
-using Api.Infrastructure.Cqrs;
+using Api.Application.Handlers.Events.External;
+using Api.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Rc.Services.Notifications.Infrastructure.Cqrs;
+using Rc.Services.Notifications.Infrastructure.Services;
 
-namespace Api.Infrastructure.Initialize
+namespace Rc.Services.Notifications.Infrastructure.Initialize
 {
-    public static class CqrsExtensions
+    public static class Extensions
     {
         public static IServiceCollection AddCommandHandlers(this IServiceCollection services)
         {
@@ -36,5 +39,21 @@ namespace Api.Infrastructure.Initialize
             services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
             return services;
         }
+
+        public static IServiceCollection AddMessageBroker(this IServiceCollection services)
+        {
+            return services.AddTransient<IMessageBroker, MessageBroker>();
+        }
+        
+        public static IServiceCollection AddEventHandlers(this IServiceCollection services)
+        {
+            services.Scan(s => s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
+                .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>)))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime());
+            return services;
+        }
+        
+        
     }
 }

@@ -1,8 +1,5 @@
 using System;
-using Api.Helpers.Swagger;
-using Api.Hubs;
-using Api.Infrastructure.Errors;
-using Api.Infrastructure.Initialize;
+using EasyNetQ;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,8 +7,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Rc.Services.Notifications.Api.Helpers.Swagger;
+using Rc.Services.Notifications.Infrastructure.Errors;
+using Rc.Services.Notifications.Infrastructure.Initialize;
 
-namespace Api
+namespace Rc.Services.Notifications.Api
 {
     public class Startup
     {
@@ -46,12 +46,15 @@ namespace Api
                 c.OperationFilter<ApplySwaggerDescriptionFilter>();
             });
             services
+                .AddSingleton(typeof(IBus), RabbitHutch.CreateBus(Configuration["RabbitMq"]))
                 .AddHttpContextAccessor()
                 .AddCommandDispatcher()
                 .AddQueryDispatcher()
                 .AddCommandHandlers()
                 .AddQueryHandlers()
+                .AddEventHandlers()
                 .AddExceptionToErrorMapper<ExceptionToResponseMapper>()
+                .AddMessageBroker()
                 .AddSignalR();
         }
 
@@ -80,7 +83,7 @@ namespace Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<Notifications>("/notification-hub");
+                endpoints.MapHub<Hubs.Notifications>("/notification-hub");
             });
         }
     }

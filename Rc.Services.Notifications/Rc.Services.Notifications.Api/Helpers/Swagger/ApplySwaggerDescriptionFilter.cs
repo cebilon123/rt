@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Api.Attributes;
 using Microsoft.OpenApi.Models;
+using Rc.Services.Notifications.Api.Attributes;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Api.Helpers.Swagger
+namespace Rc.Services.Notifications.Api.Helpers.Swagger
 {
     public class ApplySwaggerDescriptionFilter : IOperationFilter
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
-using Api.Core.Exceptions;
+using Rc.Services.Notifications.Core.Exceptions;
 using ApplicationException = Api.Application.Exceptions.ApplicationException;
 
-namespace Api.Infrastructure.Errors
+namespace Rc.Services.Notifications.Infrastructure.Errors
 {
     public class ExceptionToResponseMapper : IExceptionToResponseMapper
     {

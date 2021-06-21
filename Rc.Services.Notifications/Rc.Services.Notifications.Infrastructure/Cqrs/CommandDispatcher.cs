@@ -2,7 +2,7 @@
 using Api.Application.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Api.Infrastructure.Cqrs
+namespace Rc.Services.Notifications.Infrastructure.Cqrs
 {
     public class CommandDispatcher : ICommandDispatcher
     {

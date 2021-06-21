@@ -1,7 +1,6 @@
 ﻿using System;
-using Api.Application.Exceptions;
 
-namespace Api.Infrastructure.Errors
+namespace Rc.Services.Notifications.Infrastructure.Errors
 {
     public interface IExceptionToResponseMapper
     {

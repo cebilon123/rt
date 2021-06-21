@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Api.Infrastructure.Errors
+namespace Rc.Services.Notifications.Infrastructure.Errors
 {
     public class Error
     {

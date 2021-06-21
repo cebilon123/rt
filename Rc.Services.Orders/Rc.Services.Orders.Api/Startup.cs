@@ -71,6 +71,13 @@ namespace Rc.Services.Orders.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
             }
 
+            app.UseCors(c =>
+            {
+                c.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins("http://localhost:8080")
+                    .AllowCredentials();
+            });
 
             app.UseHttpsRedirection();
 

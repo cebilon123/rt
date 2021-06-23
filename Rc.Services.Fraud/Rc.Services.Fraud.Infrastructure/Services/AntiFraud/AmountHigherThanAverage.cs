@@ -13,7 +13,7 @@ namespace Rc.Services.Fraud.Infrastructure.Services.AntiFraud
         {
             _api = api;
         }
-        
+
         public async Task<bool> IsValid(OrderDto orderDto)
         {
             var orders = await _api.FetchAll();

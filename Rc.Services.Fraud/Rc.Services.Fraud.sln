@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rc.Services.Fraud.Core", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rc.Services.Fraud.Infrastructure", "Rc.Services.Fraud.Infrastructure\Rc.Services.Fraud.Infrastructure.csproj", "{FF4849D8-098D-47DF-8D58-A36495F66D48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rc.Services.Fraud.Tests", "Rc.Services.Fraud.Tests\Rc.Services.Fraud.Tests.csproj", "{FF5829B1-62D7-4F52-8264-82519DB7AB1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{FF4849D8-098D-47DF-8D58-A36495F66D48}.Release|x64.Build.0 = Release|Any CPU
 		{FF4849D8-098D-47DF-8D58-A36495F66D48}.Release|x86.ActiveCfg = Release|Any CPU
 		{FF4849D8-098D-47DF-8D58-A36495F66D48}.Release|x86.Build.0 = Release|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Debug|x64.Build.0 = Debug|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Debug|x86.Build.0 = Debug|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Release|x64.ActiveCfg = Release|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Release|x64.Build.0 = Release|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Release|x86.ActiveCfg = Release|Any CPU
+		{FF5829B1-62D7-4F52-8264-82519DB7AB1C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

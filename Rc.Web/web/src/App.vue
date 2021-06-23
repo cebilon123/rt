@@ -1,5 +1,14 @@
 <template>
   <div id="app">
+    <div class="text-blue-700 mt-40 ml-40 mr-40 mb-40">
+      This is just presenting the task in a certain way. I am aware of many shortcuts and imperfections, but nevertheless it is a presentation of an idea. 
+      The whole thing was built using microservices in .net, RabbitMq, Vue and I used the boilerplate (which is still being passively created in my free time) 
+      of my authorship for the solutions. I was froced to improvise for a little bit, in fact notiffication service is not authenticated and notifications are shown for every user 
+      of the app, but be real, there wasn't a lot of time.
+    </div>
+    <div class="text-blue-700 mt-40 ml-40 mr-40 mb-40">
+      For every minute fraud service checks if there are any orders with state "new" so be patient :). All errors and notifications are being shown in right upper corner.
+    </div>
     <div
       class="flex h-screen bg-gray-200 items-center justify-center"
       autocomplete="off"
@@ -282,6 +291,7 @@
               px-4
               py-2
             "
+            @click="cleanOrder()"
           >
             Clear
           </button>

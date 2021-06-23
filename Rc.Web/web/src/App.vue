@@ -1,18 +1,338 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div
+      class="flex h-screen bg-gray-200 items-center justify-center"
+      autocomplete="off"
+    >
+      <div
+        class="
+          grid
+          bg-white
+          rounded-lg
+          shadow-xl
+          w-11/12
+          md:w-9/12
+          lg:w-1/2
+          pt-16
+          pb-4
+        "
+      >
+        <div class="flex justify-center">
+          <div class="flex">
+            <h1 class="text-gray-600 font-bold md:text-2xl text-xl">
+              Create order
+            </h1>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 mt-5 mx-7">
+          <label
+            class="
+              uppercase
+              md:text-sm
+              text-xs text-gray-500 text-light
+              font-semibold
+            "
+            >Email</label
+          >
+          <input
+            v-model="order.email"
+            class="
+              py-2
+              px-3
+              rounded-lg
+              border-2 border-purple-300
+              mt-1
+              focus:outline-none
+              focus:ring-2 focus:ring-purple-600
+              focus:border-transparent
+            "
+            type="text"
+            placeholder="Email"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
+          <div class="grid grid-cols-1">
+            <label
+              class="
+                uppercase
+                md:text-sm
+                text-xs text-gray-500 text-light
+                font-semibold
+              "
+              >Amount</label
+            >
+            <input
+              class="
+                py-2
+                px-3
+                rounded-lg
+                border-2 border-purple-300
+                mt-1
+                focus:outline-none
+                focus:ring-2 focus:ring-purple-600
+                focus:border-transparent
+              "
+              type="number"
+              placeholder="Amount"
+              v-model="order.amount"
+            />
+          </div>
+          <div class="grid grid-cols-1">
+            <label
+              class="
+                uppercase
+                md:text-sm
+                text-xs text-gray-500 text-light
+                font-semibold
+              "
+              >Street</label
+            >
+            <input
+              class="
+                py-2
+                px-3
+                rounded-lg
+                border-2 border-purple-300
+                mt-1
+                focus:outline-none
+                focus:ring-2 focus:ring-purple-600
+                focus:border-transparent
+              "
+              type="text"
+              placeholder="Street"
+              v-model="order.address.street"
+            />
+          </div>
+          <div class="grid grid-cols-1">
+            <label
+              class="
+                uppercase
+                md:text-sm
+                text-xs text-gray-500 text-light
+                font-semibold
+              "
+              >Country</label
+            >
+            <input
+              class="
+                py-2
+                px-3
+                rounded-lg
+                border-2 border-purple-300
+                mt-1
+                focus:outline-none
+                focus:ring-2 focus:ring-purple-600
+                focus:border-transparent
+              "
+              type="text"
+              placeholder="Country"
+              v-model="order.address.country"
+            />
+          </div>
+
+          <div class="grid grid-cols-1">
+            <label
+              class="
+                uppercase
+                md:text-sm
+                text-xs text-gray-500 text-light
+                font-semibold
+              "
+              >City</label
+            >
+            <input
+              class="
+                py-2
+                px-3
+                rounded-lg
+                border-2 border-purple-300
+                mt-1
+                focus:outline-none
+                focus:ring-2 focus:ring-purple-600
+                focus:border-transparent
+              "
+              type="text"
+              placeholder="City"
+              v-model="order.address.city"
+            />
+          </div>
+
+          <div class="grid grid-cols-1">
+            <label
+              class="
+                uppercase
+                md:text-sm
+                text-xs text-gray-500 text-light
+                font-semibold
+              "
+              >Zip code</label
+            >
+            <input
+              class="
+                py-2
+                px-3
+                rounded-lg
+                border-2 border-purple-300
+                mt-1
+                focus:outline-none
+                focus:ring-2 focus:ring-purple-600
+                focus:border-transparent
+              "
+              type="number"
+              placeholder="Zip code"
+              v-model="order.address.zipCode"
+            />
+          </div>
+        </div>
+
+        <div class="grid-cols-1 pl-40 pr-40 pt-10 pb-10">
+          <div
+            v-for="product in order.products"
+            :key="product.id"
+            class="grid grid-cols-3"
+          >
+            <div class="grid grid-cols-1">
+              <label
+                class="
+                  uppercase
+                  md:text-sm
+                  text-xs text-gray-500 text-light
+                  font-semibold
+                "
+                >Product name</label
+              >
+              <input
+                class="
+                  py-2
+                  px-3
+                  rounded-lg
+                  border-2 border-purple-300
+                  mt-1
+                  focus:outline-none
+                  focus:ring-2 focus:ring-purple-600
+                  focus:border-transparent
+                "
+                type="text"
+                placeholder="Product name"
+                v-model="product.name"
+              />
+            </div>
+
+            <div class="grid grid-cols-1">
+              <label
+                class="
+                  uppercase
+                  md:text-sm
+                  text-xs text-gray-500 text-light
+                  font-semibold
+                "
+                >Quantity</label
+              >
+              <input
+                class="
+                  ml-3
+                  py-2
+                  px-3
+                  rounded-lg
+                  border-2 border-purple-300
+                  mt-1
+                  focus:outline-none
+                  focus:ring-2 focus:ring-purple-600
+                  focus:border-transparent
+                "
+                type="text"
+                placeholder="Quantity"
+                v-model="product.quantity"
+              />
+            </div>
+
+            <div class="grid grid-cols-1 ml-3">
+              <button
+                class="
+                  w-auto
+                  bg-green-500
+                  hover:bg-green-700
+                  rounded-lg
+                  shadow-xl
+                  font-medium
+                  text-white
+                  px-4
+                  py-2
+                "
+                @click="appendWithNewProduct($event)"
+              >
+                Add next product
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center md:gap-8 gap-4 pt-5 pb-5">
+          <button
+            class="
+              w-auto
+              bg-gray-500
+              hover:bg-gray-700
+              rounded-lg
+              shadow-xl
+              font-medium
+              text-white
+              px-4
+              py-2
+            "
+          >
+            Clear
+          </button>
+          <button
+            class="
+              w-auto
+              bg-purple-500
+              hover:bg-purple-700
+              rounded-lg
+              shadow-xl
+              font-medium
+              text-white
+              px-4
+              py-2
+            "
+            type="submit"
+            @click="postOrder()"
+          >
+            Create
+          </button>
+        </div>
+      </div>
+    </div>
     <notifications group="notify" />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
   name: "App",
-  components: {
-    HelloWorld,
+  components: {},
+  data() {
+    return {
+      order: {
+        email: "dummy@mail.com",
+        amount: 230,
+        address: {
+          street: "Test",
+          country: "Nigeria",
+          city: "Testland",
+          zipCode: 24592,
+        },
+        products: [
+          {
+            id: 0,
+            name: "Dummy",
+            quantity: 1,
+          },
+        ],
+      },
+    };
   },
 
   mounted() {
@@ -54,6 +374,50 @@ export default {
           break;
       }
     });
+  },
+
+  methods: {
+    postOrder() {
+      this.$axios
+        .post("https://localhost:5001/Order", this.order)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      this.cleanOrder();
+    },
+
+    cleanOrder() {
+      this.order = {
+        email: "",
+        amount: 0,
+        address: {
+          street: "",
+          country: "",
+          city: "",
+          zipCode: 0,
+        },
+        products: [
+          {
+            id: 0,
+            name: "",
+            quantity: 1,
+          },
+        ],
+      };
+    },
+
+    appendWithNewProduct(event) {
+      event.srcElement.hidden = true;
+      this.order.products.push({
+        id: Math.floor(Math.random() * 10000),
+        name: "",
+        quantity: 1
+      })
+    }
   },
 };
 </script>

@@ -5,6 +5,6 @@
         public bool SendNotification => true;
 
         public Notification GetNotification()
-            => new(NotificationType.Warning, "Order was suspended and waits for review");
+            => new(NotificationType.Error, "Order was suspended and waits for review");
     }
 }

@@ -21,10 +21,10 @@ namespace Rc.Services.Orders.Api.Controllers
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
         }
-        
+
         [HttpPost]
         [SwaggerDescription("Returns ok, which means the command was accepted")]
-        public async Task<ActionResult> CreateOrder(CreateOrder createOrder)
+        public async Task<ActionResult> CreateOrder([FromBody] CreateOrder createOrder)
         {
             await _commandDispatcher.SendAsync(createOrder);
             return Ok();
@@ -34,11 +34,11 @@ namespace Rc.Services.Orders.Api.Controllers
         [Route("new")]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersWithStatusNew()
             => Ok((await _queryDispatcher.QueryAsync(new GetOrdersWithStatusNew())).Orders);
-        
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersByEmail([FromQuery]string email)
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrdersByEmail([FromQuery] string email)
             => Ok((await _queryDispatcher.QueryAsync(new GetOrdersByEmail(email))).Orders);
-        
+
         [HttpGet]
         [Route("all")]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetAllOrders()

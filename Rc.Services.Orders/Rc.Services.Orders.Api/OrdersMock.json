@@ -1,0 +1,50 @@
+﻿[
+  {
+    "email": "string@test.com",
+    "amount": 1000,
+    "address": {
+      "street": "Bakery 4",
+      "country": "USA",
+      "city": "New York",
+      "zipCode": 90819
+    },
+    "products": [
+      {
+        "name": "Iphone 89",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "email": "int@test.com",
+    "amount": 200,
+    "address": {
+      "street": "Bakery 42",
+      "country": "England",
+      "city": "Old York",
+      "zipCode": 12104
+    },
+    "products": [
+      {
+        "name": "Bose Headset",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "email": "decimal@test.com",
+    "amount": 300,
+    "address": {
+      "street": "Andsy 2",
+      "country": "Sweden",
+      "city": "New York",
+      "zipCode": 4819
+    },
+    "products": [
+      {
+        "name": "MacBook",
+        "quantity": 7
+      }
+    ]
+  }
+]

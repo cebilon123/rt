@@ -15,6 +15,7 @@ using Rc.Services.Orders.Infrastructure.Initialize;
 using Rc.Services.Orders.Infrastructure.Rabbit;
 using Rc.Services.Orders.Infrastructure.Repositories;
 using Rc.Services.Orders.Infrastructure.Repositories.Documents;
+using Rc.Services.Orders.Infrastructure.Services;
 
 namespace Rc.Services.Orders.Api
 {
@@ -60,10 +61,14 @@ namespace Rc.Services.Orders.Api
                 .AddRepository<OrderDocument, Guid>("orders")
                 .AddCommandDispatcher()
                 .AddQueryDispatcher();
+
+            services.AddSingleton<IInitJsonService, InitJsonService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.ApplicationServices.GetService<IInitJsonService>()?.Init();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

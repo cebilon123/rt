@@ -14,7 +14,8 @@ namespace Rc.Services.Orders.Application.Handlers.Commands.Handlers
         private readonly IEventProcessor _eventProcessor;
         private readonly IMessageBroker _broker;
 
-        public CreateOrderCommandHandler(IOrderRepository orderRepository, IEventProcessor eventProcessor, IMessageBroker broker)
+        public CreateOrderCommandHandler(IOrderRepository orderRepository, IEventProcessor eventProcessor,
+            IMessageBroker broker)
         {
             _orderRepository = orderRepository;
             _eventProcessor = eventProcessor;
@@ -31,7 +32,7 @@ namespace Rc.Services.Orders.Application.Handlers.Commands.Handlers
 
             var order = Order.Create(command.Email, command.Amount, command.Address.ToValueTypeAddress(),
                 command.Products.Select(p => p.ToValueTypeProduct()));
-            
+
             await _orderRepository.Insert(order);
             await _eventProcessor.ProcessAsync(order.Events);
         }

@@ -67,8 +67,6 @@ namespace Rc.Services.Fraud.Tests.Services.AntiFraud
         [Test]
         public async Task Test_IsValid_NotNigeria_ReturnsTrue()
         {
-            var expected = true;
-
             var result = await _nigeriaRule.IsValid(new OrderDto()
             {
                 Amount = 9999,
@@ -84,8 +82,6 @@ namespace Rc.Services.Fraud.Tests.Services.AntiFraud
         [Test]
         public async Task Test_IsValid_NigeriaAmountLessThan1000_ReturnsTrue()
         {
-            var expected = true;
-
             var result = await _nigeriaRule.IsValid(new OrderDto()
             {
                 Amount = 99,
@@ -101,8 +97,6 @@ namespace Rc.Services.Fraud.Tests.Services.AntiFraud
         [Test]
         public async Task Test_IsValid_NigeriaAmount1000OrMoreNewOrder_ReturnsFalse()
         {
-            var expected = true;
-
             var result = await _nigeriaRule.IsValid(new OrderDto()
             {
                 Email = "cl@test.com",
@@ -131,8 +125,6 @@ namespace Rc.Services.Fraud.Tests.Services.AntiFraud
         [Test]
         public async Task Test_IsValid_NigeriaAmount1000OrMoreNotNewOrder_ReturnsTrue()
         {
-            var expected = true;
-
             var result = await _nigeriaRule.IsValid(new OrderDto()
             {
                 Email = "client@test.com",

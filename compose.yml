@@ -1,0 +1,83 @@
+version: "3.7"
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+        - 27017:27017
+    networks:
+        - rc
+    volumes:
+        - mongo:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+        - 5672:5672
+        - 15672:15672
+    networks:
+        - rc
+
+  notifications-service:
+    build: ./Rc.Services.Notifications
+    container_name: notifications-service
+    restart: unless-stopped
+    ports:
+        - 5003:443
+    networks:
+        - rc
+    depends_on:
+        - orders-service
+        - fraud-service
+    environment: 
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=test
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  orders-service:
+    build: ./Rc.Services.Orders
+    container_name: orders-service
+    restart: unless-stopped
+    ports:
+      - 5001:80
+    networks:
+      - rc
+
+  fraud-service:
+    build: ./Rc.Services.Fraud
+    container_name: fraud-service
+    restart: unless-stopped
+    ports:
+      - 5002:80
+    networks:
+      - rc
+    depends_on:
+      - orders-service
+    
+  web:
+    build: ./Rc.Web/Web
+    container_name: web
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    networks:
+      - rc
+    depends_on:
+      - orders-service
+      - fraud-service
+      - notifications-service
+
+networks:
+  rc:
+    name: rc-network
+    external: true
+
+volumes:
+    mongo:
+        driver: local

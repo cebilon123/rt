@@ -68,13 +68,10 @@ namespace Rc.Services.Orders.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.ApplicationServices.GetService<IInitJsonService>()?.Init();
-            
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
+
+            app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
-            }
 
             app.UseCors(c =>
             {

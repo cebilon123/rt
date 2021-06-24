@@ -48,8 +48,8 @@ namespace Rc.Services.Notifications.Api
                 c.OperationFilter<ApplySwaggerDescriptionFilter>();
             });
             services
-                .AddSingleton(typeof(IBus), RabbitHutch.CreateBus(Configuration["RabbitMq"]))
                 .AddHttpContextAccessor()
+                .AddSingleton(typeof(IBus), RabbitHutch.CreateBus(Configuration["RabbitMq"]))
                 .AddCommandDispatcher()
                 .AddQueryDispatcher()
                 .AddCommandHandlers()

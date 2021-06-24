@@ -389,7 +389,7 @@ export default {
   methods: {
     postOrder() {
       this.$axios
-        .post("https://localhost:5001/Order", this.order)
+        .post("http://localhost:5001/Order", this.order)
         .then((res) => {
           console.log(res);
         })
